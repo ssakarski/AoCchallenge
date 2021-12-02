@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Text;
+using System.IO;
+using System.Collections.Generic;
 
 namespace TestingGit
 {
@@ -6,7 +9,82 @@ namespace TestingGit
     {
         static void Main(string[] args)
         {
-            
+            // Day 1 of Advent Of Code !!!
+           // string[] depth = File.ReadAllLines(@"C:\Users\User\source\repos\TestingGit\TestInputs\depthInput.txt");
+           // depthCount(depth);
+
+            // Day 2 of Advent Of Code !!!   D:\Users\User\Desktop\pathTest.txt   C:\Users\User\source\repos\TestingGit\TestInputs\submarineMovement.txt
+            string[] movement = File.ReadAllLines(@"C:\Users\User\source\repos\TestingGit\TestInputs\submarineMovement.txt");
+            submarineMovement(movement);
+        }
+
+        static void submarineMovement(string[] mov)
+        {
+            int forward = 0;
+            int depth = 0;
+            int aim = 0;
+            string[] test = new string[2];
+            for (int i = 0; i < mov.Length; i++)
+            {
+                test = mov[i].Split(" ");
+                switch (test[0])
+                {
+                    case "forward": 
+                        { 
+                            forward += int.Parse(test[1]);
+                            depth = depth+(aim*int.Parse(test[1]));
+                            break;
+                        }
+                    case "up": 
+                        {
+                            aim -= int.Parse(test[1]);
+                            break;
+                        }
+                    default:
+                        {
+                            aim += int.Parse(test[1]);
+                            break;
+                        }
+                }
+            }
+            Console.WriteLine("forward: "+forward);
+            Console.WriteLine("depth: " + depth);
+            Console.WriteLine("aim: " + aim);
+            Console.WriteLine("distance: {0}",depth * forward);
+        }
+        static void depthCount(string[] depth)
+        {
+            /*  Test input
+                199
+                200
+                208
+                210
+                200
+                207
+                240
+                269
+                260
+                263
+                Test output
+                7
+            */
+            int[] d = Array.ConvertAll(depth, item => int.Parse(item));
+            int[] depthHolder = new int[d.Length - 2];
+            int firstSum = 0;
+            int counter = 0;
+            for (int i = 0; i < d.Length - 2; i++)
+            {
+                firstSum = d[i] + d[i + 1] + d[i + 2];
+                depthHolder[i] = firstSum;
+            }
+            for (int i = 0; i < depthHolder.Length - 1; i++)
+            {
+                if (depthHolder[i] < depthHolder[i + 1])
+                {
+                    counter += 1;
+                }
+            }
+            Console.WriteLine(counter);
         }
     }
 }
