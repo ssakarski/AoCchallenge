@@ -9,15 +9,54 @@ namespace TestingGit
     {
         static void Main(string[] args)
         {
-            // Day 1 of Advent Of Code !!!
-           // string[] depth = File.ReadAllLines(@"C:\Users\User\source\repos\TestingGit\TestInputs\depthInput.txt");
-           // depthCount(depth);
+            // Day 1 of Advent of Code !!!
+            // string[] depth = File.ReadAllLines(@"C:\Users\User\source\repos\TestingGit\TestInputs\depthInput.txt");
+            // depthCount(depth);
 
-            // Day 2 of Advent Of Code !!!   D:\Users\User\Desktop\pathTest.txt   C:\Users\User\source\repos\TestingGit\TestInputs\submarineMovement.txt
-            string[] movement = File.ReadAllLines(@"C:\Users\User\source\repos\TestingGit\TestInputs\submarineMovement.txt");
-            submarineMovement(movement);
+            // Day 2 of Advent of Code !!!
+            // string[] movement = File.ReadAllLines(@"C:\Users\User\source\repos\TestingGit\TestInputs\submarineMovement.txt");
+            // submarineMovement(movement);
+            // Day 3 of Advent of Code !!!  D:\Users\User\Desktop\testInputs.txt    C:\Users\User\source\repos\TestingGit\TestInputs\binDiagnostic.txt
+            string[] binDiagnostic = File.ReadAllLines(@"C:\Users\User\source\repos\TestingGit\TestInputs\binDiagnostic.txt");
+            binaryDiagnostic(binDiagnostic);
         }
 
+        static void binaryDiagnostic(string[] bin)
+        {
+            string currentBitLine = "";
+            int[] currentBitCount = new int[bin[0].Length];
+            string gammaRate = "";
+            string epsilonRate = "";
+            // Finding the most common bits
+            for (int i = 0; i < bin.Length; i++)
+            {
+                currentBitLine = bin[i];
+                for (int j = 0; j < bin[i].Length; j++)
+                {
+                    if (currentBitLine[j] == '1')
+                    {
+                        currentBitCount[j] += 1;
+                    }
+                }
+            }
+            // Finding the gamma and epsilon rates
+            for (int i = 0; i < currentBitCount.Length; i++)
+            {
+                if (currentBitCount[i] < bin.Length/2)
+                {
+                    gammaRate += "0";
+                    epsilonRate += "1";
+                }
+                else
+                {
+                    gammaRate += "1";
+                    epsilonRate += "0";
+                }
+            }
+            int decimalGammaRate = Convert.ToInt32(gammaRate, 2);
+            int decimalEpsilonRate = Convert.ToInt32(epsilonRate, 2);
+            Console.WriteLine(decimalGammaRate*decimalEpsilonRate);
+        }
         static void submarineMovement(string[] mov)
         {
             int forward = 0;
