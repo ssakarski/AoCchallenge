@@ -1,4 +1,2 @@
-# TestingGit
-Testing Git and practicing old things.
-
-Also doing the Advent of Code callendar.
+# AoC challenge
+Doing the Advent of Code callendar.
